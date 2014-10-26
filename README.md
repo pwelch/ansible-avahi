@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/pwelch/ansible-avahi.svg)](http://travis-ci.org/pwelch/ansible-avahi)
+
 # Overview
 
 Ansible Playbook for [avahi](http://avahi.org/) the zeroconf software.
