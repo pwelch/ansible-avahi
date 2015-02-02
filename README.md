@@ -8,10 +8,10 @@ Ansible Playbook for [avahi](http://avahi.org/) the zeroconf software.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 ```
-hostname: "{{ ansible_hostname }}"
-domain: "local"
-useipv4: "yes"
-useipv6: "no"
+avahi_hostname: "{{ ansible_hostname }}"
+avahi_domain: "local"
+avahi_useipv4: "yes"
+avahi_useipv6: "no"
 ```
 ## Dependencies
 
