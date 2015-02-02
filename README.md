@@ -4,6 +4,27 @@
 
 Ansible Playbook for [avahi](http://avahi.org/) the zeroconf software.
 
+## Role Variables
+
+Available variables are listed below, along with default values (see `defaults/main.yml`):
+```
+hostname: "{{ ansible_hostname }}"
+domain: "local"
+useipv4: "yes"
+useipv6: "no"
+```
+## Dependencies
+
+None.
+
+## Example Playbook
+```
+---
+- hosts: all
+  roles:
+    - avahi
+```
+
 ## Development
 Requires [Vagrant](http://www.vagrantup.com/)
 

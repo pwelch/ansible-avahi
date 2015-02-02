@@ -1,5 +1,4 @@
 ---
-
 galaxy_info:
   author: pwelch
   description: Install and configure Avahi zeroconf service.
@@ -11,3 +10,4 @@ galaxy_info:
     - precise
   categories:
     - networking
+dependencies: []
