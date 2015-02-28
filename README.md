@@ -12,6 +12,7 @@ hostname: "{{ ansible_hostname }}"
 domain: "local"
 useipv4: "yes"
 useipv6: "no"
+avahi_install_utils: false
 ```
 ## Dependencies
 
