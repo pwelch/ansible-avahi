@@ -5,7 +5,7 @@
 
 - name: Install avahi-utils package
   when: avahi_install_utils
-  apt: pkg=avahi-daemon state=present
+  apt: pkg=avahi-utils state=present
 
 - name: Avahi | Update avahi config
   template:
