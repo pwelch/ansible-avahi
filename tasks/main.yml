@@ -3,6 +3,10 @@
 - name: Install avahi-daemon package
   apt: pkg=avahi-daemon state=present
 
+- name: Install avahi-utils package
+  when: avahi_install_utils
+  apt: pkg=avahi-utils state=present
+
 - name: Avahi | Update avahi config
   template:
     src: avahi-daemon.conf.j2
@@ -12,3 +16,4 @@
     mode: 0644
   notify:
     - restart avahi-daemon
+
