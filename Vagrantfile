@@ -23,15 +23,14 @@ Vagrant.configure("2") do |config|
   # Install Ansible
   config.vm.provision :shell, :inline => <<-EOF
   apt-get install -qq python-dev python-apt python-pycurl python-pip && \
-  pip install ansible==1.7.0
+  pip install ansible==1.8.0
   EOF
 
   # Setup and run tests
   config.vm.provision :shell, :inline => <<-EOF
   cd /home/vagrant/ansible-avahi && \
   mkdir test
-  echo localhost > test/inventory
-  ansible-playbook --syntax-check --inventory-file test/inventory test.yml
-  ansible-playbook --inventory-file test/inventory test.yml --connection=local --sudo
+  ansible-playbook --syntax-check --inventory-file=tests/inventory test.yml
+  ansible-playbook --inventory-file=tests/inventory tests/test.yml --connection=local --sudo
   EOF
 end
