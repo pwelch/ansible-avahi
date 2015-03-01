@@ -5,11 +5,24 @@ branches:
 language: python
 python: "2.7"
 before_install:
- - sudo apt-get update -qq
- - sudo apt-get install -qq python-apt python-pycurl
+  # Install CI requirements.
+  - tests/ci.sh
 install:
-  - pip install ansible==1.7.0
+  # Install Ansible.
+  - pip install ansible==1.8.0
 script:
-  - echo localhost > inventory
-  - ansible-playbook --syntax-check -i inventory test.yml
-  - ansible-playbook -i inventory test.yml --connection=local --sudo
+  # Check the role/playbook's syntax.
+  - ansible-playbook --syntax-check --inventory-file=tests/inventory tests/test.yml
+
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook --inventory-file=tests/inventory tests/test.yml --connection=local --sudo
+
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    ansible-playbook --inventory-file=tests/inventory tests/test.yml --connection=local --sudo
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Run the test suite
+  - bats tests/tests.bats
