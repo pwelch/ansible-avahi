@@ -1,4 +1,5 @@
 [![Build Status](https://secure.travis-ci.org/pwelch/ansible-avahi.svg)](http://travis-ci.org/pwelch/ansible-avahi)
+[![Current Version](http://img.shields.io/github/release/pwelch/ansible-avahi.svg?style=flat)](https://galaxy.ansible.com/list#/roles/2026)
 
 # Overview
 
