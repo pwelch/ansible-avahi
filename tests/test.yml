@@ -1,9 +1,5 @@
 ---
-
-- hosts: all
-  vars_files:
-    - '../defaults/main.yml'
-  tasks:
-    - include: '../tasks/main.yml'
-  handlers:
-    - include: '../handlers/main.yml'
+- hosts: localhost
+  become: yes
+  roles:
+    - ansible-avahi
