@@ -2,3 +2,5 @@
 Icon
 ._*
 .vagrant
+build/
+ansible.cfg

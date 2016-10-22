@@ -10,27 +10,26 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus", CORES.to_i]
   end
 
-  config.vm.box     = "precise64_vmware"
-  config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
+  config.vm.box = "precise64"
 
-  config.vm.network :private_network, ip: "33.33.33.10"
+  config.vm.network :private_network, ip: "192.168.99.133"
 
   config.vm.synced_folder ".", "/home/vagrant/ansible-avahi"
 
   # Update apt-get
-  config.vm.provision :shell, :inline => "apt-get update"
+  config.vm.provision :shell, inline: "apt-get update"
 
   # Install Ansible
-  config.vm.provision :shell, :inline => <<-EOF
-  apt-get install -qq python-dev python-apt python-pycurl python-pip && \
-  pip install ansible==1.8.0
-  EOF
+  config.vm.provision :shell, path: "tests/ci.sh"
 
   # Setup and run tests
-  config.vm.provision :shell, :inline => <<-EOF
+  config.vm.provision :shell, inline: <<-EOF
   cd /home/vagrant/ansible-avahi && \
-  mkdir test
-  ansible-playbook --syntax-check --inventory-file=tests/inventory test.yml
-  ansible-playbook --inventory-file=tests/inventory tests/test.yml --connection=local --sudo
+  ansible-lint . &&
+  printf '[defaults]\nroles_path=../' >ansible.cfg &&
+  ansible-playbook --syntax-check --inventory-file=tests/inventory tests/test.yml &&
+  ansible-playbook --inventory-file=tests/inventory tests/test.yml --connection=local &&
+  sleep 3 &&
+  bats tests/tests.bats
   EOF
 end
