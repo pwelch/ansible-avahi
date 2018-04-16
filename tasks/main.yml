@@ -16,3 +16,13 @@
     mode: 0644
   notify:
     - restart avahi-daemon
+
+- name: Avahi | Add smb avahi service
+  template:
+    src: smb.service.j2
+    dest: "/etc/avahi/services/smb.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart avahi-daemon
