@@ -9,6 +9,6 @@ galaxy_info:
     versions:
     - precise
     - trusty
-  categories:
+  galaxy_tags:
     - networking
 dependencies: []
